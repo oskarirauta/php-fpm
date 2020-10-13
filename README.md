@@ -1,2 +1,2 @@
 # php-fpm
-php-fpm inside AlpineLinux container
+minimal php-fpm inside AlpineLinux container
