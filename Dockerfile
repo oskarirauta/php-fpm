@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG VERSION
+#ARG VERSION
 
 # Environments
 ENV MEMORY_LIMIT=256M \
