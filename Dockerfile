@@ -58,15 +58,15 @@ RUN set -xe && \
 
 RUN set -eux; \
 	addgroup -g 82 -S www-data; \
-	adduser -u 82 -D -S -G www-data www
+	adduser -u 82 -D -S -G www-data -g www www
 
-COPY entrypoint.sh /usr/bin/entrypoint.sh
+COPY entrypoint.sh /docker-entrypoint.sh
 
 WORKDIR /var/www
 
 VOLUME ["/var/www"]
 
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 9000
 
