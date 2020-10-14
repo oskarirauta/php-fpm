@@ -62,15 +62,13 @@ RUN set -eux; \
 	
 RUN set -eux; \
 	mkdir -p /var/www \
+	chown -R www:www-data /var/www
 
 COPY entrypoint.sh /docker-entrypoint.sh
 
-WORKDIR /var/www
-
 VOLUME ["/var/www"]
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 EXPOSE 9000
 
+WORKDIR /var/www
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/php-fpm7"]
