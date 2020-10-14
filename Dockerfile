@@ -38,6 +38,8 @@ RUN 	rm -f /var/cache/apk/*
 
 COPY entrypoint.sh /scripts/entrypoint.sh
 
+RUN    chmod a+x /scripts/entrypoint.sh
+
 VOLUME ["/var/www"]
 VOLUME ["/scripts/entrypoint.d"]
 
