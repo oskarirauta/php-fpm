@@ -57,15 +57,15 @@ RUN set -xe && \
         php7
 
 RUN set -eux; \
-	addgroup -g 82 -S www-data; \
-	adduser -u 82 -D -S -G www-data -g www www; \
-	mkdir -p /var/www; \
+	addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -S -G www-data -g www www && \
+	mkdir -p /var/www && \
 	chown -R www:www-data /var/www
 	
 RUN set -eux; \
-	mkdir -p /scripts /scripts/entrypoint.d /etc/php7/templates /etc/php7/templates/php-fpm.d; \
-	mv /etc/php7/php-fpm.conf /etc/php7/templates/; \
-	mv /etc/php7/php-fpm.d/www.conf /etc/php7/templates/php-fpm.d/; \
+	mkdir -p /scripts /scripts/entrypoint.d /etc/php7/templates /etc/php7/templates/php-fpm.d && \
+	mv /etc/php7/php-fpm.conf /etc/php7/templates/ && \
+	mv /etc/php7/php-fpm.d/www.conf /etc/php7/templates/php-fpm.d/ && \
 	mv /etc/php7/php.ini /etc/php7/templates/
 
 COPY entrypoint.sh /scripts/entrypoint.sh
@@ -73,6 +73,5 @@ COPY entrypoint.sh /scripts/entrypoint.sh
 VOLUME ["/var/www"]
 EXPOSE 9000
 
-WORKDIR /var/www
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 CMD ["/usr/sbin/php-fpm7"]
