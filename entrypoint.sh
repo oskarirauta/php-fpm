@@ -39,11 +39,11 @@ set -e
   sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini
 }
 
-if /usr/bin/find "/docker-entrypoint.d/" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v; then
-  echo >&3 "$0: /docker-entrypoint.d/ is not empty, will attempt to perform configuration"
+if /usr/bin/find "/scripts/entrypoint.d/" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v; then
+  echo >&3 "$0: /scripts/entrypoint.d/ is not empty, will attempt to perform configuration"
   
   echo >&3 "$0: Looking for shell scripts in /docker-entrypoint.d/"
-  find "/docker-entrypoint.d/" -follow -type f -print | sort -n | while read -r f; do
+  find "/scripts/entrypoint.d/" -follow -type f -print | sort -n | while read -r f; do
       case "$f" in
           *.sh)
               if [ -x "$f" ]; then
@@ -60,7 +60,7 @@ if /usr/bin/find "/docker-entrypoint.d/" -mindepth 1 -maxdepth 1 -type f -print 
   
   echo >&3 "$0: Configuration complete; ready for start up"
 else
-  echo >&3 "$0: No files found in /docker-entrypoint.d/, skipping configuration"
+  echo >&3 "$0: No files found in /scripts/entrypoint.d/, skipping configuration"
 fi
 
 exec "$@"
