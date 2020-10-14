@@ -71,6 +71,8 @@ RUN set -eux; \
 COPY entrypoint.sh /scripts/entrypoint.sh
 
 VOLUME ["/var/www"]
+VOLUME ["/scripts/entrypoint.d"]
+
 EXPOSE 9000
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
