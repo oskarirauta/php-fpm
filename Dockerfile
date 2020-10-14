@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-#ARG VERSION
+ARG VERSION
 
 # Environments
 ENV MEMORY_LIMIT=256M \
@@ -58,12 +58,15 @@ RUN set -xe && \
 
 RUN set -eux; \
 	addgroup -g 82 -S www-data; \
-	adduser -u 82 -D -S -G www-data -g www www
+	adduser -u 82 -D -S -G www-data -g www www \
+	mkdir -p /var/www \
+	chown -R www:www-data /var/www
 	
 RUN set -eux; \
-	mkdir -p /var/www /docker-entrypoint.d /scripts /etc/php7/templates \
-	mv /etc/php7/php-fpmd.conf /etc/php7/templates/ \
-	chown -R www:www-data /var/www
+	mkdir -p /docker-entrypoint.d /scripts /etc/php7/templates /etc/php7/templates/php-fpm.d \
+	mv /etc/php7/php-fpm.conf /etc/php7/templates/ \
+	mv /etc/php7/php-fpm.d/www.conf /etc/php7/templates/php-fpm.d/
+	mv /etc/php7/php.ini /etc/php7/templates/
 
 COPY entrypoint.sh /scripts/docker-entrypoint.sh
 
