@@ -63,11 +63,4 @@ else
   echo >&3 "$0: No files found in /docker-entrypoint.d/, skipping configuration"
 fi
 
-mkdir -p /var/www
-
-#addgroup -g ${GID} -S phpgroup && adduser -u ${UID} -G phpgroup -H -D -s /sbin/nologin phpuser
-
-[[ $(stat -c %U /var/www) == "www" ]] || chown -R www /var/www
-[[ $(stat -c %G /var/www) == "www-data" ]] || chgrp -R www-data /var/www
-
 exec "$@"
