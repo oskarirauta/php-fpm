@@ -63,16 +63,16 @@ RUN set -eux; \
 	chown -R www:www-data /var/www
 	
 RUN set -eux; \
-	mkdir -p /docker-entrypoint.d /scripts /etc/php7/templates /etc/php7/templates/php-fpm.d; \
+	mkdir -p /scripts /scripts/entrypoint.d /etc/php7/templates /etc/php7/templates/php-fpm.d; \
 	mv /etc/php7/php-fpm.conf /etc/php7/templates/; \
 	mv /etc/php7/php-fpm.d/www.conf /etc/php7/templates/php-fpm.d/; \
 	mv /etc/php7/php.ini /etc/php7/templates/
 
-COPY entrypoint.sh /scripts/docker-entrypoint.sh
+COPY entrypoint.sh /scripts/entrypoint.sh
 
 VOLUME ["/var/www"]
 EXPOSE 9000
 
 WORKDIR /var/www
-ENTRYPOINT ["/scripts/docker-entrypoint.sh"]
+ENTRYPOINT ["/scripts/entrypoint.sh"]
 CMD ["/usr/sbin/php-fpm7"]
