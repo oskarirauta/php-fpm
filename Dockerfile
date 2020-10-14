@@ -61,14 +61,14 @@ RUN set -eux; \
 	adduser -u 82 -D -S -G www-data -g www www
 	
 RUN set -eux; \
-	mkdir -p /var/www \
+	mkdir -p /var/www /docker-entrypoint.d /scripts /etc/php7/templates \
 	chown -R www:www-data /var/www
 
-COPY entrypoint.sh /docker-entrypoint.sh
+COPY entrypoint.sh /scripts/docker-entrypoint.sh
 
 VOLUME ["/var/www"]
 EXPOSE 9000
 
 WORKDIR /var/www
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/scripts/docker-entrypoint.sh"]
 CMD ["/usr/sbin/php-fpm7"]
