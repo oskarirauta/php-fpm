@@ -40,10 +40,10 @@ set -e
 }
 
 # execute any pre-init scripts
-for i in /scripts/pre-init.d/*sh
+for i in /scripts/entrypoint.d/*sh
 do
 	if [ -e "${i}" ]; then
-		echo "[i] pre-init.d - processing $i"
+		echo "[i] entrypoint.d - processing $i"
 		. "${i}"
 	fi
 done
