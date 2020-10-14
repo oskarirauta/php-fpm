@@ -3,7 +3,6 @@
 # entrypoint.sh
 
 set -e
-[[ "$DEBUG" == "true" ]] && set -x
 
 # Set environments
 
@@ -40,12 +39,8 @@ set -e
 }
 
 # execute any pre-init scripts
-for i in /scripts/entrypoint.d/*sh
-do
-	if [ -e "${i}" ]; then
-		echo "[i] entrypoint.d - processing $i"
-		. "${i}"
-	fi
+for f in /scripts/entrypoint.d/*sh; do
+	[ -e "${f}" ] && "${f}"
 done
 
 exec "$@"
