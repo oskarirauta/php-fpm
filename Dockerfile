@@ -62,6 +62,7 @@ RUN set -eux; \
 	
 RUN set -eux; \
 	mkdir -p /var/www /docker-entrypoint.d /scripts /etc/php7/templates \
+	mv /etc/php7/php-fpmd.conf /etc/php7/templates/ \
 	chown -R www:www-data /var/www
 
 COPY entrypoint.sh /scripts/docker-entrypoint.sh
