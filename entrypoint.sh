@@ -17,7 +17,7 @@ set -e
   sed -i "s|;*access.log\s*=\s*log/php7/\$pool.access.log|access.log = /proc/self/fd/1|g" /etc/php7/php-fpm.d/www.conf
   sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 127.0.0.1:9000|g" /etc/php7/php-fpm.d/www.conf
   sed -i "s|;*listen.mode\s*=\s*0660|listen.mode = 0666|g" /etc/php7/php-fpm.d/www.conf
-  sed -i "s|;*chdir\s*=\s*/var/www|chdir = /var/www|g" /etc/php7/php-fpm.d/www.conf
+  sed -i "s|;*chdir\s*=\s*/var/www|chdir = /var/htdocs|g" /etc/php7/php-fpm.d/www.conf
   sed -i "s|pm.max_children =.*|pm.max_children = ${PM_MAX_CHILDREN}|i" /etc/php7/php-fpm.d/www.conf
   sed -i "s|pm.start_servers =.*|pm.start_servers = ${PM_START_SERVERS}|i" /etc/php7/php-fpm.d/www.conf
   sed -i "s|pm.min_spare_servers =.*|pm.min_spare_servers = ${PM_MIN_SPARE_SERVERS}|i" /etc/php7/php-fpm.d/www.conf
