@@ -19,7 +19,7 @@ RUN \
 
 RUN \
 	addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -s /bin/ash -h /var/htdocs -G www-data -g www www
+	adduser -u 82 -D -S -h /var/htdocs -G www-data -g www www
 
 RUN \
 	apk --no-cache add php7-bcmath php7-bz2 php7-curl php7-ctype php7-dom php7-exif php7-fileinfo php7-gd \
