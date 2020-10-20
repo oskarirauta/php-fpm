@@ -15,7 +15,13 @@ ENV \
 
 RUN \
 	apk --no-cache update && \
-	apk --no-cache upgrade && \
+	apk --no-cache upgrade
+
+RUN \
+	addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -s /bin/ash -h /var/htdocs -G www-data -g www www
+
+RUN \
 	apk --no-cache add php7-bcmath php7-bz2 php7-curl php7-ctype php7-dom php7-exif php7-fileinfo php7-gd \
 	php7-gettext php7-gmp php7-iconv php7-json php7-mbstring php7-mysqli php7-mysqlnd php7-odbc \
 	php7-opcache php7-openssl php7-pecl-imagick php7-pdo php7-pdo_dblib php7-pdo_mysql php7-pdo_odbc \
@@ -23,10 +29,8 @@ RUN \
 	php7-xmlreader php7-xmlrpc php7-zip php7-fpm php7
 
 RUN \
-	addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data -g www www && \
-	mkdir -p /var/www && \
-	chown -R www:www-data /var/www
+	mkdir -p /var/htdocs && \
+	chown -R www:www-data /var/htdocs
 	
 RUN \
 	mkdir -p /scripts /scripts/entrypoint.d /etc/php7/templates /etc/php7/templates/php-fpm.d && \
@@ -38,7 +42,7 @@ RUN 	rm -f /var/cache/apk/*
 
 COPY entrypoint.sh /scripts/entrypoint.sh
 
-VOLUME ["/var/www"]
+VOLUME ["/var/htdocs"]
 VOLUME ["/scripts/entrypoint.d"]
 
 EXPOSE 9000
